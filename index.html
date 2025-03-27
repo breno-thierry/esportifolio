@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Web Car</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      body, html {
+        font-family: 'Arial', sans-serif;
+        overflow-x: hidden;
+        height: 100%;
+        background: url(img/lamnbi.webp) no-repeat center center/cover;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 50px;
+        background-color: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+
+      header h2 span {
+        color: orangered;
+      }
+
+      header nav {
+        display: flex;
+        align-items: center;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 30px;
+      }
+
+      nav ul li a {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        padding: 5px;
+        transition: color 0.3s ease-in-out;
+      }
+
+      nav ul li a:hover,
+      .active {
+        color: orangered;
+      }
+
+      .icons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .icons a {
+        text-decoration: none;
+      }
+
+      .icons a i {
+        font-size: 1.5rem;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        padding: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .icons a i:hover {
+        transform: scale(1.2);
+        color: orangered;
+        border-color: orangered;
+      }
+
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        position: relative;
+        top: 100px;
+        color: #fff;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+      }
+
+      .content-text {
+        max-width: 600px;
+        padding: 20px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7);
+      }
+
+      .content-text h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .content-text span {
+        color: orangered;
+      }
+
+      .content-text p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        background: linear-gradient(90deg, #f5f5f5, #ee2f0d);
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+
+      .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0px 4px 15px rgba(255, 100, 50, 0.6);
+      }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+        header {
+          padding: 15px 20px;
+        }
+
+        header h2 {
+          font-size: 2rem;
+        }
+
+        nav ul {
+          gap: 20px;
+        }
+
+        .content-text h1 {
+          font-size: 2.5rem;
+        }
+
+        .content-text p {
+          font-size: 1rem;
+        }
+
+        .btn {
+          padding: 12px 20px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <h2>C<span>A</span>R$</h2>
+      <nav>
+        <ul>
+          <li><a class="active" href="#home">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li><a href="#informacoes">Informações</a></li>
+        </ul>
+      </nav>
+
+      <div class="icons">
+        <a href="#"><i class="bx bxl-google"></i></a>
+        <a href="#"><i class="bx bxl-facebook"></i></a>
+        <a href="#"><i class="bx bxl-github"></i></a>
+        <a href="#"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="content-text">
+        <h1>Dirija <span>Seus Sonhos!</span></h1>
+        <p>
+          A Web Car é a plataforma exclusiva para quem busca os melhores carros de luxo.
+          Com um portfólio cuidadosamente selecionado, oferecemos veículos de marcas renomadas,
+          com desempenho, conforto e design excepcionais. Nossa missão é proporcionar uma experiência
+          única na compra e venda de carros de luxo, com total segurança, transparência e atendimento
+          personalizado. Explore nossa coleção e encontre o carro dos seus sonhos!
+        </p>
+        <button class="btn">Explore Agora!</button>
+      </div>
+    </div>
+  </body>
+</html>
