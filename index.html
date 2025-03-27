@@ -3,211 +3,427 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <title>Web Car</title>
+    <title>Portfólio - Breno Thierry</title>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Reset básico */
       * {
-        box-sizing: border-box;
-        padding: 0;
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
-      body, html {
-        font-family: 'Arial', sans-serif;
-        overflow-x: hidden;
-        height: 100%;
-        background: url(img/lamnbi.webp) no-repeat center center/cover;
+      body {
+        background-color: #1e293b;
+        color: #e2e8f0;
+        min-height: 100vh;
+        overflow-x: hidden; /* Impede o movimento horizontal */
       }
 
-      header {
+      /* Container principal */
+      .container {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 50px;
-        background-color: rgba(0, 0, 0, 0.6);
+        transition: margin-left 0.3s ease;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 250px;
+        background-color: #2d3748;
+        height: 100vh;
         position: fixed;
-        width: 100%;
         top: 0;
-        z-index: 1000;
-      }
-
-      header h2 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #fff;
-        letter-spacing: 1px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-      }
-
-      header h2 span {
-        color: orangered;
-      }
-
-      header nav {
+        left: 0;
+        flex-shrink: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
+        padding-top: 2rem;
+        transition: transform 0.3s ease;
       }
 
-      nav ul {
-        display: flex;
-        gap: 30px;
+      .sidebar.closed {
+        transform: translateX(-250px);
       }
 
-      nav ul li a {
+      .sidebar h2 {
+        color: #4fd1c5;
+        margin-bottom: 2rem;
+      }
+
+      .sidebar-content p,
+      .sidebar-content a {
         font-size: 1.1rem;
-        font-weight: 500;
-        color: #fff;
-        text-decoration: none;
-        padding: 5px;
-        transition: color 0.3s ease-in-out;
-      }
-
-      nav ul li a:hover,
-      .active {
-        color: orangered;
-      }
-
-      .icons {
-        display: flex;
-        gap: 15px;
-      }
-
-      .icons a {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: #e2e8f0;
+        transition: color 0.3s;
         text-decoration: none;
       }
 
-      .icons a i {
-        font-size: 1.5rem;
-        color: #fff;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        padding: 10px;
-        transition: all 0.3s ease;
+      .sidebar-content a:hover {
+        color: #4fd1c5;
       }
 
-      .icons a i:hover {
-        transform: scale(1.2);
-        color: orangered;
-        border-color: orangered;
+      /* Conteúdo principal */
+      .main-content {
+        flex: 1;
+        margin-left: 0;
+        padding: 1rem;
+        transition: margin-left 0.3s ease;
+        padding-left: 0;
       }
 
-      .content {
+      .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 2rem;
+        background: none;
+        border: none;
+        color: #e2e8f0;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      /* Seção Início */
+      .cabecalho {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
-        position: relative;
-        top: 100px;
-        color: #fff;
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-      }
-
-      .content-text {
-        max-width: 600px;
-        padding: 20px;
         text-align: center;
-        background: rgba(0, 0, 0, 0.6);
-        border-radius: 10px;
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.7);
+        padding: 3rem 1rem;
       }
 
-      .content-text h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
-        font-weight: 700;
+      .foto-perfil {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: 3px solid #4fd1c5;
+        margin-bottom: 1.5rem;
+        object-fit: cover;
       }
 
-      .content-text span {
-        color: orangered;
+      .cabecalho h1 {
+        font-size: 2.5rem;
+        color: #4fd1c5;
+        margin-bottom: 0.5rem;
       }
 
-      .content-text p {
+      .cabecalho p.subtitulo {
+        font-size: 1.2rem;
+        font-weight: 300;
+      }
+
+      /* Seção Sobre */
+      .sobre {
+        background-color: #2d3748;
+        text-align: center;
+        padding: 3rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+      }
+
+      .sobre h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #4fd1c5;
+      }
+
+      .caixa-sobre p {
+        max-width: 800px;
+        margin: 0 auto;
         font-size: 1.1rem;
         line-height: 1.6;
-        margin-bottom: 30px;
       }
 
-      .btn {
-        background: linear-gradient(90deg, #f5f5f5, #ee2f0d);
-        color: #fff;
-        padding: 15px 25px;
-        border-radius: 25px;
-        font-size: 1rem;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: all 0.4s ease;
+      /* Seção Projetos */
+      .projetos {
+        background-color: #1a202c;
+        text-align: center;
+        padding: 3rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
       }
 
-      .btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0px 4px 15px rgba(255, 100, 50, 0.6);
+      .projetos h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #4fd1c5;
+      }
+
+      .projetos-caixa {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .projeto {
+        background-color: #2d3748;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 280px;
+        transition: transform 0.3s ease;
+      }
+
+      .projeto:hover {
+        transform: translateY(-5px);
+      }
+
+      .projeto img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .projeto h3 {
+        font-size: 1.3rem;
+        margin: 10px;
+      }
+
+      .projeto p {
+        margin: 0 10px 10px;
+      }
+
+      /* Rodapé */
+      footer {
+        background-color: #2d3748;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      .social {
+        margin-bottom: 10px;
+      }
+
+      .social a {
+        font-size: 1.5rem;
+        color: #e2e8f0;
+        margin: 0 10px;
+        transition: color 0.3s ease;
+      }
+
+      .social a:hover {
+        color: #4fd1c5;
+      }
+
+      /* Seção Contato */
+      .contato {
+        background-color: #2d3748;
+        text-align: center;
+        padding: 3rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+      }
+
+      .contato h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #4fd1c5;
+      }
+
+      .caixa-contato p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0 auto;
+        max-width: 800px;
       }
 
       /* Responsividade */
       @media (max-width: 768px) {
-        header {
-          padding: 15px 20px;
-        }
-
-        header h2 {
+        .cabecalho h1 {
           font-size: 2rem;
         }
-
-        nav ul {
-          gap: 20px;
-        }
-
-        .content-text h1 {
-          font-size: 2.5rem;
-        }
-
-        .content-text p {
+        .cabecalho p.subtitulo {
           font-size: 1rem;
         }
-
-        .btn {
-          padding: 12px 20px;
-          font-size: 0.9rem;
+        .projetos-caixa {
+          flex-direction: column;
+          align-items: center;
         }
+        .projeto {
+          width: 90%;
+        }
+      }
+
+      a {
+        color: #fff;
+      }
+
+      a:hover {
+        color: #4fd1c5;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      /* Estilo para os links do menu lateral */
+      .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .sidebar-content a {
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        text-align: center;
+        color: #e2e8f0;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        text-decoration: none;
+      }
+
+      .sidebar-content a:hover {
+        color: #4fd1c5;
       }
     </style>
   </head>
-
   <body>
-    <header class="header">
-      <h2>C<span>A</span>R$</h2>
-      <nav>
-        <ul>
-          <li><a class="active" href="#home">Início</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#contato">Contato</a></li>
-          <li><a href="#informacoes">Informações</a></li>
-        </ul>
-      </nav>
+    <!-- Botão para abrir/fechar a sidebar (sempre visível) -->
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
 
-      <div class="icons">
-        <a href="#"><i class="bx bxl-google"></i></a>
-        <a href="#"><i class="bx bxl-facebook"></i></a>
-        <a href="#"><i class="bx bxl-github"></i></a>
-        <a href="#"><i class="bx bxl-linkedin"></i></a>
-      </div>
-    </header>
+    <div class="container">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+          <a href="#inicio">Início</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </aside>
 
-    <div class="content">
-      <div class="content-text">
-        <h1>Dirija <span>Seus Sonhos!</span></h1>
-        <p>
-          A Web Car é a plataforma exclusiva para quem busca os melhores carros de luxo.
-          Com um portfólio cuidadosamente selecionado, oferecemos veículos de marcas renomadas,
-          com desempenho, conforto e design excepcionais. Nossa missão é proporcionar uma experiência
-          única na compra e venda de carros de luxo, com total segurança, transparência e atendimento
-          personalizado. Explore nossa coleção e encontre o carro dos seus sonhos!
-        </p>
-        <button class="btn">Explore Agora!</button>
+      <!-- Conteúdo principal -->
+      <div class="main-content" id="mainContent">
+        <!-- Seção Início -->
+        <section id="inicio" class="cabecalho">
+          <img
+            src="./img/estilo.jpg"
+            alt="Foto de Breno Thierry, desenvolvedor"
+            class="foto-perfil"
+          />
+          <h1>Breno Thierry</h1>
+          <p class="subtitulo">Desenvolvedor Front-end e Back-end</p>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section id="sobre" class="sobre">
+          <h2>Sobre Mim</h2>
+          <div class="caixa-sobre">
+            <p>
+              Sou Breno Thierry Pereira, desenvolvedor web com expertise em
+              criar soluções robustas e bem estruturadas. Meu foco está em
+              desenvolver aplicações eficientes e adaptáveis, sempre alinhadas
+              às melhores práticas do mercado.
+            </p>
+          </div>
+        </section>
+
+        <!-- Seção Projetos -->
+        <section id="projetos" class="projetos">
+          <h2>Meus Projetos</h2>
+          <div class="projetos-caixa">
+            <a href="menu/logincadastro/index.html">
+              <div class="projeto">
+                <img src="./img/cadastro.png" alt="Projeto de Cadastro" />
+                <h3>Cadastro</h3>
+                <p>Formulário para cadastro de novos usuários.</p>
+              </div>
+            </a>
+
+            <a href="Projeto SLIDER/index.html">
+              <div class="projeto">
+                <img src="./img/viagens.png" alt="Projeto de Viagens" />
+                <h3>Viagens</h3>
+                <p>Plataforma para explorar destinos turísticos.</p>
+              </div>
+            </a>
+
+            <a href="website.using/index.html">
+              <div class="projeto">
+                <img src="./img/projeto web-card.png" alt="Loja de Carros" />
+                <h3>Loja de Carros</h3>
+                <p>Loja online de carros de luxo.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Seção Contato -->
+        <section id="contato" class="contato">
+          <h2>Contato</h2>
+          <div class="caixa-contato">
+            
+            <form>
+              <label for="nome">Nome:</label>
+              <input type="text" id="nome" name="nome" required /><br /><br />
+
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+              /><br /><br />
+
+              <label for="mensagem">Mensagem:</label><br />
+              <textarea
+                id="mensagem"
+                name="mensagem"
+                rows="4"
+                required
+              ></textarea
+              ><br /><br />
+
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Rodapé -->
+        <footer>
+          <div class="social">
+            <a
+              href="https://www.linkedin.com/in/breno-thierry-b34970271"
+              target="_blank"
+            >
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/brenothierry" target="_blank">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          </div>
+          <p>© 2025 Breno Thierry. Todos os direitos reservados.</p>
+        </footer>
       </div>
     </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("mainContent");
+
+        sidebar.classList.toggle("closed");
+        mainContent.classList.toggle("shifted");
+      }
+    </script>
   </body>
 </html>
